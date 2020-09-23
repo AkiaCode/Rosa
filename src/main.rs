@@ -1,13 +1,6 @@
-use rosa::Downloader::download;
-use std::io::Write;
-use std::fs;
-use std::io;
-use std::io::Read;
-use std::convert::TryInto;
+use rosa::*;
 
 fn main() {
-	let mut img = download("https://torchedsammy.github.io/assets/img/profile.png", ".");
-	let mut file = fs::File::create("test.png").unwrap();
- 
-    io::copy(&mut img, &mut file);
+	let mut img = get_file("https://torchedsammy.github.io/assets/img/profile.png");
+	download(&mut img, ".", "test.png");
 }
