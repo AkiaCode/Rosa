@@ -3,9 +3,9 @@ use std::io::{Read, copy};
 use std::fs::File;
 
 pub fn get_file(url: &str) -> impl Read {
-	let request: ureq::Response = ureq::get(url).call();
+	let response: ureq::Response = ureq::get(url).call();
 	
-	request.into_reader()
+	response.into_reader()
 }
 
 pub fn download<F: ?Sized>(mut file: &mut F, path: &str, name: &str) where F: Read {
