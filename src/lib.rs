@@ -15,5 +15,8 @@ pub fn get_file(url: &str) -> Result<impl Read, &ureq::Error> {
 pub fn download<F: ?Sized>(mut file: &mut F, path: &str, name: &str) where F: Read {
 	let destpath = &[&path, "/", &name].join("");
 	let mut dest = File::create(destpath).unwrap();
-	copy(&mut file, &mut dest).unwrap();
+	match copy(&mut file, &mut dest) {
+    	Ok(a) => a,
+    	_ => unreachable!(),
+	};
 }
