@@ -427,6 +427,8 @@ dependencies = [
  "lazy_static",
  "qstring",
  "rustls",
+ "serde",
+ "serde_json",
  "url",
  "webpki",
  "webpki-roots",

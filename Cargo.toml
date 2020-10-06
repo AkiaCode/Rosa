@@ -5,4 +5,4 @@ authors = ["TorchedSammy <no@no.no>"]
 edition = "2018"
 
 [dependencies]
-ureq = "1.4"
+ureq = {version = "1.4", features = ["json"]}
