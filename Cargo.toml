@@ -1,8 +1,8 @@
 [package]
-name = "rosa"
-version = "0.1.0"
+name = "rosadl"
+version = "0.1.2"
 authors = ["TorchedSammy <no@no.no>"]
 edition = "2018"
 
 [dependencies]
-ureq = "1.5.1"
+ureq = {version = "1.5.1", features = ["json"]}
