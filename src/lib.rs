@@ -1,14 +1,19 @@
 use ureq;
+use std::result::Result;
 use std::io::{Read, copy};
 use std::fs::File;
 
-pub fn get_file(url: &str) -> impl Read {
-	let response: ureq::Response = ureq::get(url).call();
-	
-	response.into_reader()
+pub fn get_file(url: &str) -> Result<impl Read, String> {
+	let response = ureq::get(url).call();
+	if let Some(err) = response.synthetic_error() {
+		return Err(err.to_string())
+	}
+
+	Ok(response.into_reader())
 }
 
-pub fn download_files(filenames: Vec<&str>, path: &str, urls: Vec<&str>) {
+
+pub fn download_multi(filenames: Vec<&str>, path: &str, urls: Vec<&str>) {
 	let mut b = 0;
 	for i in urls {
 		let responses: ureq::Response = ureq::get(i).call();
@@ -17,12 +22,7 @@ pub fn download_files(filenames: Vec<&str>, path: &str, urls: Vec<&str>) {
 		let extension = &i[len - 4..];
 		let file = filenames.clone()[b];
 		let filename: &str = &(file.to_string() + extension);
-		let destpath = &[&path,"/", filename].join("");
-		let mut dest =  File::create(destpath).unwrap();
-		match copy(&mut files, &mut dest) {
-			Ok(a) => a,
-			_ => unreachable!(),
-		};
+		download(&mut files, path, filename);
 	  	b += 1;
 	}
 }
