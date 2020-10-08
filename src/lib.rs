@@ -23,7 +23,7 @@ pub fn download_multi(filenames: Vec<&str>, path: &str, urls: Vec<&str>) {
 		let file = filenames.clone()[b];
 		let filename: &str = &(file.to_string() + extension);
 		download(&mut files, path, filename);
-	  	b += 1;
+		b += 1;
 	}
 }
 
@@ -31,7 +31,7 @@ pub fn download<F: ?Sized>(mut file: &mut F, path: &str, name: &str) where F: Re
 	let destpath = &[&path, "/", &name].join("");
 	let mut dest = File::create(destpath).unwrap();
 	match copy(&mut file, &mut dest) {
-    	Ok(a) => a,
-    	_ => unreachable!(),
+		Ok(a) => a,
+		_ => unreachable!(),
 	};
 }

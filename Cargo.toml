@@ -1,7 +1,7 @@
 [package]
 name = "rosadl"
 version = "0.1.2"
-authors = ["TorchedSammy <no@no.no>"]
+authors = ["TorchedSammy"]
 edition = "2018"
 
 [dependencies]
